@@ -20,10 +20,20 @@ Este repositorio contiene:
 
 ## 🚀 Uso
 
-Puedes ir a la carpeta raíz y hacer:
+Para ejecutar directo:
 
 ```python
-python src/aco.py
+python main.py
+```
+Si quieres importar en un notebook o en otro script:
+```
+from src import run_aco, dist_matrix_euclidea
+import pandas as pd
+
+df = pd.read_csv("https://raw.githubusercontent.com/it-ces/GA-OPTA-PUJ/main/cities.csv")
+distancias, nombres = dist_matrix_euclidea(df, n=20)
+resultados = run_aco(50, 50, distancias, 0.1)
+print(resultados["mejor_camino"])
 ```
 
 ## 👩‍💻 Autoras
