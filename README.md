@@ -2,9 +2,13 @@
 
 Este repositorio contiene:
 
-- **Código Python** para la implementación del algoritmo ACO (Ant Colony Optimization) con distancias euclidianas, incluyendo funciones optimizadas para:
+- **Código** para la implementación del algoritmo ACO (Ant Colony Optimization) con distancias euclidianas, incluyendo funciones optimizadas para:
   - Generar matriz de distancias a partir de coordenadas (lat/lng)
-  - Construir recorridos de hormigas y calcular sus c
+  - Construir recorridos de hormigas y calcular su costo óptimo y ruta ideal y peor
+  - Visuales con mapa de mejor y peor ruta
+- **LaTeX**
+  - Código en LaTeX
+  - PPT
 
 ## 📂 Estructura del proyecto
 ```
