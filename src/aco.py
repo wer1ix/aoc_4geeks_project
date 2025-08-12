@@ -2,7 +2,7 @@
 import random
 import numpy as np
 import pandas as pd
-from utils import dist_matrix_euclidea
+from utils import dist_matrix_euclidea, mostrar_ruta_folium
 
 # ===================== Datos y distancias =====================
 
@@ -149,5 +149,10 @@ if __name__ == "__main__":
         verbose=True
     )
 
+    mejor_ruta = resultados["mejor_camino"]
+    peor_ruta = resultados["mejor_camino"]
+
     print("\nMejor camino:", resultados["mejor_camino"])
     print("Costo total:", resultados["mejor_costo"])
+
+    mostrar_ruta_folium(df, nombres, mejor_ruta, pausa_segundos=1)
