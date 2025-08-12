@@ -7,6 +7,7 @@ Este repositorio contiene:
   - Construir recorridos de hormigas y calcular sus c
 
 ## 📂 Estructura del proyecto
+```
 .
 ├── src/ # Código Python
 │ ├── aco.py # Implementación del ACO
@@ -15,6 +16,7 @@ Este repositorio contiene:
 │ ├── paper.tex # Documento LaTeX
 │ └── paper.pdf # Documento compilado
 └── README.md # Este archivo
+```
 
 ## 🚀 Uso
 
