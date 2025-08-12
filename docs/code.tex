@@ -1,0 +1,326 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{lmodern}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+% Tema base
+\usetheme{Madrid}
+
+% Colores personalizados
+\definecolor{violeta}{RGB}{142,68,173} % #8e44ad
+\definecolor{rosa}{RGB}{255,105,180}   % #ff69b4
+\definecolor{rosapastel}{RGB}{255,182,193}
+
+% Colores Beamer
+\setbeamercolor{structure}{fg=violeta} % títulos, secciones
+\setbeamercolor{title}{fg=white,bg=violeta}
+\setbeamercolor{frametitle}{fg=white,bg=violeta}
+\setbeamercolor{itemize item}{fg=rosa}
+\setbeamercolor{itemize subitem}{fg=rosapastel}
+\setbeamercolor{block title}{fg=white,bg=violeta}
+\setbeamercolor{block body}{fg=black,bg=rosapastel!30}
+
+% Opcional: fuente en negrita para títulos
+\setbeamerfont{title}{series=\bfseries}
+\setbeamerfont{frametitle}{series=\bfseries}
+
+\title{Aplicaciones del Algoritmo Ant Colony Optimization (ACO)}
+\author{Judith, Maria Florencia, Monserrat, Mirsha, Ilse}
+\date{agosto 19, 2025}
+
+\begin{document}
+\frame{\titlepage}
+
+
+% =================== Slides team
+\begin{frame}{Introducción a las metaheurísticas)}
+
+\justifying
+\textbf{Del gr.} \textbf{Del gr.} $\epsilon\upsilon\rho\acute{\iota}\sigma\kappa\epsilon\iota\nu$ 
+ \textit{heurískein} `hallar', `inventar' y ‒́tico.\\[0.5em]
+Técnica de la indagación y del descubrimiento.\\[0.5em]
+\textbf{f.} Búsqueda o investigación de documentos o fuentes históricas.\\[0.5em]
+\textbf{f.} En algunas ciencias, manera de buscar la solución de un problema mediante métodos no rigurosos, como por tanteo, reglas empíricas, etc.
+\end{frame}
+
+\begin{frame}{Historia del Algoritmo ACO}
+\begin{columns}
+    % Columna de texto
+    \begin{column}{0.65\textwidth}
+        \justifying
+        Fue planteada por primera vez por \textbf{Marco Dorigo} en su tesis doctoral en 1992, inspirado en el comportamiento de las hormigas. 
+        Resolvío un problema clásico de optimización combinatoria conocido como el \textbf{Problema del Viajante}, que consiste en encontrar la ruta más corta que permite visitar una serie de ciudades exactamente una vez y volver a la ciudad inicial. 
+        
+        \medskip
+        A lo largo del tiempo, el método ha sido actualizado y perfeccionado, por lo que la versión original ahora se conoce como \textbf{Simple Ant Colony Optimization (SACO)}.
+    \end{column}
+
+    % Columna de imagen
+    \begin{column}{0.35\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{ruta/a/imagen.jpg} % Cambiar ruta/a/imagen.jpg
+        \captionof{figure}{Marco Dorigo, 1992}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Comportamiento de las hormigas}
+\begin{columns}
+    % Columna de texto
+    \begin{column}{0.65\textwidth}
+        \justifying
+        Las hormigas al buscar alimento inicialmente exploran aleatoriamente alrededor del nido. 
+        Durante el viaje de retorno, la cantidad de feromona que depositan en el suelo puede depender de la calidad y cantidad de alimento hallado.
+        
+        \medskip
+        Dado que las feromonas se evaporan con el tiempo, los caminos más largos pierden su señal antes, mientras que el más corto se refuerza y termina siendo el preferido por la mayoría.
+        
+        \medskip
+        Este proceso colectivo, propio de la \textbf{inteligencia en enjambre}, permite a las hormigas optimizar rutas.
+    \end{column}
+
+    % Columna de imagen
+    \begin{column}{0.35\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{ruta/a/imagen.jpg} % Cambiar por la ruta real
+        \captionof{figure}{Hormigas siguiendo rastros de feromonas}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Simple Ant Colony Optimization (SACO)}
+\justifying
+El \textbf{Simple Ant Colony Optimization (SACO)} imita el comportamiento de las colonias reales, utilizando un grupo de ``hormigas artificiales'' para buscar la mejor solución a un problema. 
+
+\medskip
+Estas hormigas virtuales dejan ``rastros de feromonas'' para comunicarse entre sí, tal como lo hacen las hormigas reales, y con el tiempo convergen hacia la solución óptima.
+\end{frame}
+
+\begin{frame}{Simulación del comportamiento de las hormigas}
+\begin{columns}
+    % Columna de imagen
+    \begin{column}{0.35\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{ruta/a/imagen.jpg} % Cambiar por la ruta real
+        \captionof{figure}{Esquema de nido y caminos}
+    \end{column}
+
+    % Columna de texto
+    \begin{column}{0.65\textwidth}
+        \justifying
+        Para simular este comportamiento establecemos:
+        \begin{itemize}
+            \item Un nido y una fuente de alimento conectados por dos caminos de longitudes distintas.
+            \item Un parámetro que representa la cantidad de feromonas depositadas en cada camino.
+            \item Un conjunto de hormigas artificiales en el nido.
+            \item Un peso o valor para cada camino, llamado \textbf{heurística} (caminos más cortos reciben un valor mayor).
+            \item Una regla de decisión para cada hormiga, donde la probabilidad de elegir un camino depende tanto de la feromona acumulada como de su valor heurístico.
+        \end{itemize}
+        Se asume que estas hormigas artificiales se comportan como las reales: toman decisiones basadas en la concentración de feromonas, pero sin conocer la longitud de los caminos.
+    \end{column}
+\end{columns}
+\end{frame}
+
+% --- Diapositiva 1: solo texto ---
+\begin{frame}{Dinámica de las feromonas}
+\justifying
+Al inicio, se asigna la misma cantidad de feromonas en ambos caminos, por lo tanto, cada hormiga elegirá aleatoriamente uno de ellos, ya que ambos tienen la misma probabilidad de ser seleccionados.
+
+A medida que las hormigas recorren y depositan feromonas, los caminos que ofrecen soluciones más rápidas o eficientes reciben más refuerzo. Sin embargo, la feromona depositada no permanece indefinidamente: con el tiempo, parte de esta feromona se evapora o desaparece gradualmente.
+\end{frame}
+
+% --- Diapositiva 2: con imagen a la izquierda ---
+\begin{frame}{Evaporación y exploración}
+\begin{columns}
+    % Columna imagen
+    \begin{column}{0.35\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{ruta/a/imagen.jpg} % Cambia ruta a tu imagen
+    \end{column}
+    % Columna texto
+    \begin{column}{0.65\textwidth}
+        \justifying
+        Este proceso de evaporación evita que las hormigas queden atrapadas en caminos subóptimos y mantiene el equilibrio entre exploración y explotación.  
+
+        Al evaporarse, la concentración de feromonas se reduce, dando oportunidad a que otros caminos menos transitados puedan ser explorados y evaluados.  
+
+        En cada iteración, las hormigas construyen rutas basadas en la concentración de feromonas y la heurística del problema. Este ciclo de construcción de soluciones, actualización y evaporación se repite muchas veces, lo que permite al sistema explorar distintas rutas y reforzar progresivamente las mejores, hasta converger hacia una solución óptima o satisfactoria.
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% =================== APLICACIONES
+\begin{frame}{Optimización de redes de datos (routing en telecomunicaciones)}
+\end{frame}
+
+% === SLIDE 1 ========
+\begin{frame}{Optimización de redes de datos (routing en telecomunicaciones)}
+\textbf{Símil:} Las hormigas son paquetes de datos buscando el camino más rápido en una red.
+
+\medskip
+\textbf{Explicación:} Igual que las hormigas dejan feromonas en caminos cortos, los paquetes “dejan rastro” en rutas rápidas y confiables, reforzando su uso.
+
+\medskip
+\textbf{Parámetros clave:}
+\begin{itemize}[noitemsep]
+    \item $\alpha$: Influencia de feromonas (historia de la red)
+    \item $\beta$: Influencia de la heurística (latencia medida)
+    \item $\rho$: Tasa de evaporación
+    \item $Q$: Intensidad de refuerzo
+\end{itemize}
+
+\medskip
+\textbf{Fórmulas:}
+\[
+P_{ij} = \frac{\tau_{ij}^\alpha \cdot \eta_{ij}^\beta}{\sum_{k} \tau_{ik}^\alpha \cdot \eta_{ik}^\beta}
+\]
+\[
+\eta_{ij} = \frac{1}{\text{latencia}_{ij}}, \quad
+\tau_{ij} \leftarrow (1-\rho)\tau_{ij} + \frac{Q}{\text{latencia\_ruta}}
+\]
+\end{frame}
+
+% ======= SLIDE 2 =====
+\begin{frame}{Planificación de viajes turísticos}
+\textbf{Símil:} Las hormigas son turistas planificando qué ciudades visitar maximizando experiencias y minimizando distancias.
+
+\medskip
+\textbf{Explicación sencilla:} El “olor” de las feromonas indica rutas populares y eficientes; la heurística valora atracciones y cercanía.
+
+\medskip
+\textbf{Parámetros clave:}
+\begin{itemize}[noitemsep]
+    \item $\alpha$: Peso de popularidad histórica
+    \item $\beta$: Peso de valor de atracciones / distancia
+    \item $\rho$: Evaporación para fomentar exploración
+\end{itemize}
+
+\medskip
+\textbf{Fórmulas:}
+\[
+\eta_{ij} = \frac{\text{valor\_atractivo}_j}{\text{distancia}_{ij}}
+\]
+\[
+\tau_{ij} \leftarrow (1-\rho)\tau_{ij} + \frac{Q}{\text{utilidad\_ruta}}
+\]
+\end{frame}
+
+% ===== SLIDE 3 ========
+\begin{frame}{Optimización de tráfico vehicular}
+\textbf{Símil:} Las hormigas son coches que eligen calles según tiempos de viaje y experiencias previas.
+
+\medskip
+\textbf{Explicación:} Las rutas con menos congestión reciben más “feromonas” (preferencia) y se refuerzan, mientras que las congestionadas pierden atractivo.
+
+\medskip
+\textbf{Parámetros clave:}
+\begin{itemize}[noitemsep]
+    \item $\alpha$: Influencia de rutas históricamente rápidas
+    \item $\beta$: Influencia de tiempo de viaje real
+    \item $\rho$: Evaporación para adaptación a cambios
+\end{itemize}
+
+\medskip
+\textbf{Fórmulas:}
+\[
+\eta_{ij} = \frac{1}{\text{tiempo\_viaje}_{ij}}, \quad
+\tau_{ij} \leftarrow (1-\rho)\tau_{ij} + \frac{Q}{\text{tiempo\_ruta}}
+\]
+\end{frame}
+
+% ========== SLIDE 4 =======
+\begin{frame}{Optimización de rutas de reparto (logística)}
+\textbf{Símil:} Las hormigas son camiones repartiendo paquetes, buscando la ruta más corta para entregar todo.
+
+\medskip
+\textbf{Explicación:} Las rutas eficientes se marcan con más feromonas; la heurística favorece caminos cortos.
+
+\medskip
+\textbf{Parámetros clave:}
+\begin{itemize}[noitemsep]
+    \item $\alpha$: Influencia de rutas usadas antes
+    \item $\beta$: Influencia de distancias
+    \item $\rho$: Evaporación de feromonas
+\end{itemize}
+
+\medskip
+\textbf{Fórmulas:}
+\[
+\eta_{ij} = \frac{1}{\text{distancia}_{ij}}
+\]
+\[
+\tau_{ij} \leftarrow (1-\rho)\tau_{ij} + \frac{Q}{\text{longitud\_ruta}}
+\]
+\end{frame}
+
+% ====== SLIDE 5 ========
+\begin{frame}{Asignación de tareas en fábricas}
+\textbf{Símil:} Las hormigas son trabajos que deben asignarse a máquinas para minimizar el tiempo total de producción.
+
+\medskip
+\textbf{Explicación:} Las combinaciones de tarea-máquina rápidas ganan más feromonas; la heurística valora menor tiempo de proceso.
+
+\medskip
+\textbf{Parámetros clave:}
+\begin{itemize}[noitemsep]
+    \item $\alpha$: Influencia de asignaciones previas exitosas
+    \item $\beta$: Influencia de tiempos de proceso
+    \item $\rho$: Evaporación para adaptación
+\end{itemize}
+
+\medskip
+\textbf{Fórmulas:}
+\[
+\eta_{ij} = \frac{1}{\text{tiempo\_proceso}_{ij}}
+\]
+\[
+\tau_{ij} \leftarrow (1-\rho)\tau_{ij} + \frac{Q}{\text{tiempo\_total}}
+\]
+\end{frame}
+
+% ======== SLIDE 6 ========
+\begin{frame}{Secuenciación de ADN (bioinformática)}
+\textbf{Símil:} Las hormigas son intentos de unir fragmentos de ADN en el orden correcto.
+
+\medskip
+\textbf{Explicación:} Las feromonas refuerzan empalmes con mayor solapamiento; la heurística premia coincidencias largas.
+
+\medskip
+\textbf{Parámetros clave:}
+\begin{itemize}[noitemsep]
+    \item $\alpha$: Influencia de empalmes anteriores
+    \item $\beta$: Influencia de longitud de solapamiento
+    \item $\rho$: Evaporación para evitar callejones sin salida
+\end{itemize}
+
+\medskip
+\textbf{Fórmulas:}
+\[
+\eta_{ij} = \text{longitud\_solapamiento}(i,j)
+\]
+\[
+\tau_{ij} \leftarrow (1-\rho)\tau_{ij} + \frac{Q}{\text{error\_ensamblaje}}
+\]
+\end{frame}
+
+\end{document}
