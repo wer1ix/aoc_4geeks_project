@@ -39,8 +39,8 @@ print(resultados["mejor_camino"])
 ## 👩‍💻 Autoras
 
 - **Maria Florencia Colombo** – [GitHub](https://github.com/usuario1)
-- **Judith** – [GitHub](https://github.com/usuario2)
+- **Judit Garzón García** – [GitHub](https://github.com/usuario2)
 - **Monserrat Zermeño** – [GitHub](https://github.com/usuario3)
-- **Mirsha Ramírez** – [GitHub](https://github.com/usuario3)
-- **Ilse Zubieta** – [GitHub](https://github.com/wer1ix)
+- **Mirsha Ramírez Garcia** – [GitHub](https://github.com/usuario3)
+- **Ilse Zubieta Martínez** – [GitHub](https://github.com/wer1ix)
 
