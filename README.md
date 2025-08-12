@@ -32,8 +32,6 @@ coords = extraer_coords(df, [1, 4, 2, 0, 3])
 print(coords)
 ```
 
-✍️ Autoras
-
 ## 👩‍💻 Autoras
 
 - **Maria Florencia Colombo** – [GitHub](https://github.com/usuario1)
