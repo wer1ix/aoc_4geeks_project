@@ -20,16 +20,10 @@ Este repositorio contiene:
 
 ## 🚀 Uso
 
-Ejemplo de extracción de coordenadas en orden a partir de una lista de índices:
+Puedes ir a la carpeta raíz y hacer:
 
 ```python
-def extraer_coords(df, lista_indices, col_lat='lat', col_lng='lng'):
-    """Devuelve un DataFrame con lat/lng en el orden dado por lista_indices."""
-    return df.iloc[lista_indices][[col_lng, col_lat]].reset_index(drop=True)
-
-# Ejemplo
-coords = extraer_coords(df, [1, 4, 2, 0, 3])
-print(coords)
+python src/aco.py
 ```
 
 ## 👩‍💻 Autoras
