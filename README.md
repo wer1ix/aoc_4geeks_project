@@ -2,9 +2,13 @@
 
 Este repositorio contiene:
 
-- **Código Python** para la implementación del algoritmo ACO (Ant Colony Optimization) con distancias euclidianas, incluyendo funciones optimizadas para:
+- **Código** para la implementación del algoritmo ACO (Ant Colony Optimization) con distancias euclidianas, incluyendo funciones optimizadas para:
   - Generar matriz de distancias a partir de coordenadas (lat/lng)
-  - Construir recorridos de hormigas y calcular sus c
+  - Construir recorridos de hormigas y calcular su costo óptimo y ruta ideal y peor
+  - Visuales con mapa de mejor y peor ruta
+- **LaTeX**
+  - Código en LaTeX
+  - PPT
 
 ## 📂 Estructura del proyecto
 ```
@@ -20,23 +24,27 @@ Este repositorio contiene:
 
 ## 🚀 Uso
 
-Ejemplo de extracción de coordenadas en orden a partir de una lista de índices:
+Para ejecutar directo:
 
 ```python
-def extraer_coords(df, lista_indices, col_lat='lat', col_lng='lng'):
-    """Devuelve un DataFrame con lat/lng en el orden dado por lista_indices."""
-    return df.iloc[lista_indices][[col_lng, col_lat]].reset_index(drop=True)
+python main.py
+```
+Si quieres importar en un notebook o en otro script:
+```
+from src import run_aco, dist_matrix_euclidea
+import pandas as pd
 
-# Ejemplo
-coords = extraer_coords(df, [1, 4, 2, 0, 3])
-print(coords)
+df = pd.read_csv("https://raw.githubusercontent.com/it-ces/GA-OPTA-PUJ/main/cities.csv")
+distancias, nombres = dist_matrix_euclidea(df, n=20)
+resultados = run_aco(50, 50, distancias, 0.1)
+print(resultados["mejor_camino"])
 ```
 
 ## 👩‍💻 Autoras
 
 - **Maria Florencia Colombo** – [GitHub](https://github.com/usuario1)
-- **Judith** – [GitHub](https://github.com/usuario2)
+- **Judit Garzón García** – [GitHub](https://github.com/usuario2)
 - **Monserrat Zermeño** – [GitHub](https://github.com/usuario3)
-- **Mirsha Ramírez** – [GitHub](https://github.com/usuario3)
-- **Ilse Zubieta** – [GitHub](https://github.com/wer1ix)
+- **Mirsha Ramírez Garcia** – [GitHub](https://github.com/usuario3)
+- **Ilse Zubieta Martínez** – [GitHub](https://github.com/wer1ix)
 
