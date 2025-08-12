@@ -30,6 +30,7 @@ def extraer_coords(df, lista_indices, col_lat='lat', col_lng='lng'):
 # Ejemplo
 coords = extraer_coords(df, [1, 4, 2, 0, 3])
 print(coords)
+```
 
 ✍️ Autoras
 
