@@ -1,5 +1,7 @@
 # Algoritmo de Colonia de Hormigas (ACO) + Documento en LaTeX
 
+Presentación de Prezi: https://prezi.com/view/ufEpddeufqBfDl3K8yIG/?referral_token=8hMEbElnB3FN
+
 Este repositorio contiene:
 
 - **Código** para la implementación del algoritmo ACO (Ant Colony Optimization) con distancias euclidianas, incluyendo funciones optimizadas para:
